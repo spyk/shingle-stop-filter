@@ -39,8 +39,11 @@ public class ShinglesStopFilter extends TokenFilter {
             char[] termBuffer = termAtt.buffer();
 
             int lastShingleSeparator;
-            while ((lastShingleSeparator = lastIndexOf(termBuffer, tokenSeparator, termAtt.length())) != -1 && lastShingleSeparator > minTokenLength) {
-                if (this.stopwords.contains(termBuffer, lastShingleSeparator + 1, termAtt.length() - lastShingleSeparator - 1)) {
+            while ((lastShingleSeparator = lastIndexOf(termBuffer, tokenSeparator, termAtt.length())) != -1 &&
+                    lastShingleSeparator > minTokenLength) {
+
+                if (this.stopwords.contains(termBuffer, lastShingleSeparator + 1,
+                        termAtt.length() - lastShingleSeparator - 1)) {
                     termAtt.copyBuffer(termBuffer, 0, lastShingleSeparator);
                 } else {
                     break;

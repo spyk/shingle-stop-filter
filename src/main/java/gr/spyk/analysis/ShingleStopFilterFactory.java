@@ -17,25 +17,20 @@ import static org.apache.lucene.analysis.core.StopFilterFactory.FORMAT_WORDSET;
  */
 public class ShingleStopFilterFactory extends TokenFilterFactory implements ResourceLoaderAware {
 
-    private CharArraySet prefixes;
-    private final String prefixFiles;
-
-    private CharArraySet suffixes;
-    private final String suffixFiles;
+    private CharArraySet stopwords;
+    private final String stopwordFiles;
 
     private final boolean ignoreCase;
     private String resourceFormat;
     private final String tokenSeparator;
 
-    protected ShingleStopFilterFactory(Map<String, String> args) {
+    public ShingleStopFilterFactory(Map<String, String> args) {
         super(args);
 
-        prefixFiles = get(args, "prefixes");
-        suffixFiles = get(args, "suffixes");
-
+        stopwordFiles = get(args, "stopwords");
         resourceFormat = get(args, "resourceFormat", FORMAT_WORDSET);
         ignoreCase = getBoolean(args, "ignoreCase", false);
-        tokenSeparator = get(args, "tokenSeparator", "");
+        tokenSeparator = get(args, "tokenSeparator", " ");
 
         if (!args.isEmpty()) {
             throw new IllegalArgumentException("Unknown parameters: " + args);
@@ -45,11 +40,9 @@ public class ShingleStopFilterFactory extends TokenFilterFactory implements Reso
     @Override
     public void inform(ResourceLoader resourceLoader) throws IOException {
         if (FORMAT_WORDSET.equalsIgnoreCase(resourceFormat)) {
-            prefixes = getWordSet(resourceLoader, prefixFiles, ignoreCase);
-            suffixes = getWordSet(resourceLoader, suffixFiles, ignoreCase);
+            stopwords = getWordSet(resourceLoader, stopwordFiles, ignoreCase);
         } else if (FORMAT_SNOWBALL.equalsIgnoreCase(resourceFormat)) {
-            prefixes = getSnowballWordSet(resourceLoader, prefixFiles, ignoreCase);
-            suffixes = getSnowballWordSet(resourceLoader, suffixFiles, ignoreCase);
+            stopwords = getSnowballWordSet(resourceLoader, stopwordFiles, ignoreCase);
         } else {
             throw new IllegalArgumentException("Unknown 'format' specified for 'prefixes' file: " + resourceFormat);
         }
@@ -57,6 +50,6 @@ public class ShingleStopFilterFactory extends TokenFilterFactory implements Reso
 
     @Override
     public TokenStream create(TokenStream tokenStream) {
-        return new ShinglesStopFilter(tokenStream, suffixes, tokenSeparator);
+        return new ShinglesStopFilter(tokenStream, stopwords, tokenSeparator);
     }
 }
