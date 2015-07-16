@@ -24,7 +24,8 @@ The filter configuration parameters. Most are similar to the original StopFilter
 A sample autocomplete configuration for Solr
 #schema.xml
 
-```
+```xml
+
 <field name="suggest" type="textSuggest" multiValued="true" />
 
 <fieldType name="textSuggest" class="solr.TextField" positionIncrementGap="100" >
@@ -44,9 +45,11 @@ A sample autocomplete configuration for Solr
   </analyzer>
 </fieldType>
 ```
+
 ##solrconfig.xml
-A sample Solr configuration
-```
+
+```xml
+
 <searchComponent name="spellSuggest" class="solr.SpellCheckComponent">
     <lst name="spellchecker">
       <str name="name">suggest</str>
@@ -74,8 +77,7 @@ A sample Solr configuration
 </requestHandler>
 ```
 
-License
-----
+#License
 
 Copyright 2015 Spyros Kapnissis
 
