@@ -1,10 +1,10 @@
 #Description
 
-A token filter that removes trailing stopwords from shingled tokens. (see https://cwiki.apache.org/confluence/display/solr/Filter+Descriptions#FilterDescriptions-ShingleFilter for more details)
+A token filter that removes any trailing stopwords from shingled tokens. (see https://cwiki.apache.org/confluence/display/solr/Filter+Descriptions#FilterDescriptions-ShingleFilter for more details)
 
-Tha main motivation is to provide better autocomplete functionality when using a suggester that uses shingled tokens by removing any trailing stopwords, as they usually don't provide any extra value and can be left out. It should usually be combined with a duplicate token removal filter. Please see below for installation instructions & a sample Solr configuration for autocomplete.
+The main motivation is to provide better autocomplete functionality when using a suggester that uses shingled tokens by removing any trailing stopwords, as they usually don't provide any extra value and can be left out. It should usually be combined with a duplicate token removal filter. Please see below for installation instructions & a sample Solr configuration for autocomplete.
 
-**Note:** The project depends on Lucene v.5.1.0, but has been tested and works with v.4.10.x as well.
+**Note:** The project depends on Lucene/Solr v.5.1.0, but has also been tested and works with v.4.10.x.
 
 #Installation
 
