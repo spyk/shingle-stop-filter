@@ -1,4 +1,4 @@
-#Description
+# Description
 
 A token filter that removes any trailing stopwords from shingled tokens. (see https://cwiki.apache.org/confluence/display/solr/Filter+Descriptions#FilterDescriptions-ShingleFilter for more details)
 
@@ -6,13 +6,13 @@ The main motivation is to provide better autocomplete functionality when using a
 
 **Note:** The project depends on Lucene/Solr v.5.1.0, but has also been tested and works with v.4.10.x.
 
-#Installation
+# Installation
 
 - Clone project from github
 - Build using maven: `mvn clean install`
 - Solr: copy `target/shingle-stop-filter-1.0-SNAPSHOT.jar` to Solr's dist folder
 
-#Parameters
+# Parameters
 
 The filter configuration parameters. Most are similar to the original StopFilter, see https://cwiki.apache.org/confluence/display/solr/Filter+Descriptions#FilterDescriptions-StopFilter for more details.
 - **stopwords (required):** The path to the stopwords file(s)
@@ -20,9 +20,10 @@ The filter configuration parameters. Most are similar to the original StopFilter
 - **ignoreCase(optional):** Ignore stopwords case
 - **tokenSeparator (optional, default " "):** Should be the token separator used in the ShingleFilter, a single space by default.
 
-#Sample Autocomplete Solr Configuration
+# Sample Autocomplete Solr Configuration
 A sample autocomplete configuration for Solr
-#schema.xml
+
+# schema.xml
 
 ```xml
 
@@ -46,10 +47,9 @@ A sample autocomplete configuration for Solr
 </fieldType>
 ```
 
-##solrconfig.xml
+# solrconfig.xml
 
 ```xml
-
 <searchComponent name="spellSuggest" class="solr.SpellCheckComponent">
     <lst name="spellchecker">
       <str name="name">suggest</str>
@@ -77,7 +77,7 @@ A sample autocomplete configuration for Solr
 </requestHandler>
 ```
 
-#License
+# License
 
 Copyright 2015 Spyros Kapnissis
 
