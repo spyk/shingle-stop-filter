@@ -3,7 +3,7 @@ package gr.spyk.analysis;
 import org.apache.lucene.analysis.BaseTokenStreamTestCase;
 import org.apache.lucene.analysis.MockTokenizer;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.util.CharArraySet;
+import org.apache.lucene.analysis.CharArraySet;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -13,7 +13,7 @@ import java.io.StringReader;
  */
 public class ShingleStopFilterTest extends BaseTokenStreamTestCase {
 
-    CharArraySet stopwords = new CharArraySet(asSet("for", "the", "and", "a", "of", "on"), false);
+    private CharArraySet stopwords = new CharArraySet(asSet("for", "the", "and", "a", "of", "on"), false);
 
     public void testPrefix() throws IOException {
         StringReader reader = new StringReader("test_and_of_for_the");
