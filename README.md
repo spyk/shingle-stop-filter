@@ -19,6 +19,7 @@ The filter configuration parameters. Most are similar to the original StopFilter
 - **resourceFormat(optional):** The stopwords resource format (normal or snowball)
 - **ignoreCase(optional):** Ignore stopwords case
 - **tokenSeparator (optional, default " "):** Should be the token separator used in the ShingleFilter, a single space by default.
+- **removeAtStart (optional, default false):** The filter will also removes the stopwords at the beginning of the shingles.
 
 ### Sample Autocomplete Solr Configuration
 A sample autocomplete configuration for Solr

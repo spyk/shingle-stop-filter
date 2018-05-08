@@ -24,10 +24,13 @@ public class ShinglesStopFilter extends TokenFilter {
 
     private char tokenSeparator = '_';
 
-    public ShinglesStopFilter(TokenStream input, CharArraySet stopwords, String tokenSeparator) {
+    private final boolean removeAtStart;
+
+    public ShinglesStopFilter(TokenStream input, CharArraySet stopwords, String tokenSeparator, boolean removeAtStart) {
         super(input);
         this.stopwords = stopwords;
         this.tokenSeparator = tokenSeparator.toCharArray()[0];
+        this.removeAtStart = removeAtStart;
     }
 
 
@@ -49,6 +52,18 @@ public class ShinglesStopFilter extends TokenFilter {
                     break;
                 }
             }
+            if (removeAtStart) {
+                int firstShingleSeparator;
+                while ((firstShingleSeparator = firstIndexOf(termBuffer, tokenSeparator, termAtt.length())) != -1) {
+
+                    if (this.stopwords.contains(termBuffer, 0, firstShingleSeparator)) {
+                        int cuttedLength = termAtt.length() - firstShingleSeparator - 1;
+                        termAtt.copyBuffer(termBuffer, firstShingleSeparator + 1, cuttedLength < 0 ? 0 : cuttedLength);
+                    } else {
+                        break;
+                    }
+                }
+            }
             return true;
         }
 
@@ -62,6 +77,19 @@ public class ShinglesStopFilter extends TokenFilter {
             arrayLength = array.length;
         }
         for (int i = arrayLength - 1; i >= 0; --i) {
+            if (c == array[i]) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    private static int firstIndexOf(char[] array, char c, int arrayLength) {
+        if (arrayLength > array.length) {
+            arrayLength = array.length;
+        }
+        for (int i = 0; i <= arrayLength; i++) {
             if (c == array[i]) {
                 return i;
             }
