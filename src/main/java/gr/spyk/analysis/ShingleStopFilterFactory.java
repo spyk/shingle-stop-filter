@@ -23,6 +23,7 @@ public class ShingleStopFilterFactory extends TokenFilterFactory implements Reso
     private final boolean ignoreCase;
     private String resourceFormat;
     private final String tokenSeparator;
+    private final boolean removeAtStart;
 
     public ShingleStopFilterFactory(Map<String, String> args) {
         super(args);
@@ -31,6 +32,7 @@ public class ShingleStopFilterFactory extends TokenFilterFactory implements Reso
         resourceFormat = get(args, "resourceFormat", FORMAT_WORDSET);
         ignoreCase = getBoolean(args, "ignoreCase", false);
         tokenSeparator = get(args, "tokenSeparator", " ");
+        removeAtStart = getBoolean(args, "removeAtStart", false);
 
         if (!args.isEmpty()) {
             throw new IllegalArgumentException("Unknown parameters: " + args);
@@ -50,6 +52,6 @@ public class ShingleStopFilterFactory extends TokenFilterFactory implements Reso
 
     @Override
     public TokenStream create(TokenStream tokenStream) {
-        return new ShinglesStopFilter(tokenStream, stopwords, tokenSeparator);
+        return new ShinglesStopFilter(tokenStream, stopwords, tokenSeparator, removeAtStart);
     }
 }

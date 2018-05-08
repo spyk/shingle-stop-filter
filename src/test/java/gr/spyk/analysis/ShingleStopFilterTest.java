@@ -21,7 +21,7 @@ public class ShingleStopFilterTest extends BaseTokenStreamTestCase {
         final MockTokenizer in = new MockTokenizer(MockTokenizer.KEYWORD, false);
         in.setReader(reader);
 
-        TokenStream stream = new ShinglesStopFilter(in, stopwords, "_");
+        TokenStream stream = new ShinglesStopFilter(in, stopwords, "_", false);
         assertTokenStreamContents(stream, new String[]{"test"});
     }
 
@@ -31,8 +31,18 @@ public class ShingleStopFilterTest extends BaseTokenStreamTestCase {
         final MockTokenizer in = new MockTokenizer(MockTokenizer.KEYWORD, false);
         in.setReader(reader);
 
-        TokenStream stream = new ShinglesStopFilter(in, stopwords, "_");
+        TokenStream stream = new ShinglesStopFilter(in, stopwords, "_", false);
         assertTokenStreamContents(stream, new String[]{"the_test_and_of_trend"});
+    }
+
+    public void testRemovePrefixAndSuffix() throws IOException {
+        StringReader reader = new StringReader("the_of_test_and_of_trend_for_the");
+
+        final MockTokenizer in = new MockTokenizer(MockTokenizer.KEYWORD, false);
+        in.setReader(reader);
+
+        TokenStream stream = new ShinglesStopFilter(in, stopwords, "_", true);
+        assertTokenStreamContents(stream, new String[]{"test_and_of_trend"});
     }
 
 
