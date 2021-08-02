@@ -4,7 +4,7 @@ A token filter that removes any trailing stopwords from shingled tokens. (see ht
 
 The main motivation is to provide better autocomplete functionality when using a suggester that uses shingled tokens by removing any trailing stopwords, as they usually don't provide any extra value and can be left out. It should usually be combined with a duplicate token removal filter. Please see below for installation instructions & a sample Solr configuration for autocomplete.
 
-**Note:** The project depends on Lucene/Solr v.6.6.0.
+**Note:** The project tests and works on Lucene/Solr versions 6.x to 8.x
 
 ### Installation
 
@@ -80,7 +80,7 @@ A sample autocomplete configuration for Solr
 
 # License
 
-Copyright 2015 Spyros Kapnissis
+Copyright (c) 2015-2021 Spyros Kapnissis
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
