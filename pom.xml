@@ -9,7 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <lucene.version>6.6.0</lucene.version>
+        <lucene.version>8.9.0</lucene.version>
     </properties>
     <distributionManagement>
         <repository>
